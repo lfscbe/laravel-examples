@@ -4,7 +4,10 @@ Usando OpenTelemetry com instrumentação **manual** em projetos Laravel.
 
 Com o pacote `laravel-open-telemetry` da [Spatie](https://spatie.be/docs/laravel-open-telemetry/v1/introduction).
 
-### Instalação
+</br>
+</br>
+
+## Instalação
 
 1. Instale o pacote.
 
@@ -21,10 +24,11 @@ php artisan open-telemetry:install
 Isso cria o arquivo `config/open-telemetry.php` com configurações do pacote.
 
 </br>
+</br>
 
-### Setup
+## Setup
 
-#### Adicionando Tags padrões
+### Adicionando Tags padrões
 
 Crie um provider de Tags ([doc](https://spatie.be/docs/laravel-open-telemetry/v1/basic-usage/adding-tags)).
 
@@ -55,7 +59,9 @@ Adicione a classe em `config/open-telemetry.php`:
 ],
 ```
 
-#### Iniciando os Traces com middlewares
+</br>
+
+### Iniciando os Traces com middlewares
 
 Crie um middleware para rodar os Traces, e acople-o as rotas.
 
@@ -92,7 +98,9 @@ class OpenTelemetryTrace
 Route::middleware([..., OpenTelemetryTrace::class])->group(...);
 ```
 
-#### Configurando o driver do Exporter
+</br>
+
+### Configurando o driver do Exporter
 
 Em `config/open-telemetry.php`, configure a `url` and `headers` (se necessario).
 
