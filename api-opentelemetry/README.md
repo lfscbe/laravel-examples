@@ -1,30 +1,32 @@
 ## About
 
-How to use OpenTelemtry with **manual** instrumentation in a Laravel Project.
+Usando OpenTelemetry com instrumentação **manual** em projetos Laravel.
 
-The `laravel-open-telemetry` package from [Spatie](https://spatie.be/docs/laravel-open-telemetry/v1/introduction) is used.
+Com o pacote `laravel-open-telemetry` da [Spatie](https://spatie.be/docs/laravel-open-telemetry/v1/introduction).
 
-#### Installation
+### Instalação
 
-1. Install the package.
+1. Instale o pacote.
 
 ```bash
 composer require spatie/laravel-open-telemetry
 ```
 
-2. Run the installer command
+2. Rode o instalador.
 
 ```bash
 php artisan open-telemetry:install
 ```
 
-This will create a `config/open-telemetry.php` with configurations of the package.
+Isso cria o arquivo `config/open-telemetry.php` com configurações do pacote.
 
-#### Setup
+</br>
 
-##### Add default tag providers
+### Setup
 
-Create a Default provider ([here](https://spatie.be/docs/laravel-open-telemetry/v1/basic-usage/adding-tags))
+#### Adicionando Tags padrões
+
+Crie um provider de Tags ([doc](https://spatie.be/docs/laravel-open-telemetry/v1/basic-usage/adding-tags)).
 
 ```php
 use Spatie\OpenTelemetry\Support\TagProviders\TagProvider;
@@ -45,7 +47,7 @@ class DefaultTagsProvider implements TagProvider
 }
 ```
 
-Then add this class to the `config/open-telemetry.php`:
+Adicione a classe em `config/open-telemetry.php`:
 
 ```php
 'span_tag_providers' => [
@@ -53,9 +55,9 @@ Then add this class to the `config/open-telemetry.php`:
 ],
 ```
 
-#### Start the traces with a middleware
+#### Iniciando os Traces com middlewares
 
-Create a middleware to run the traces and add it in the routes.
+Crie um middleware para rodar os Traces, e acople-o as rotas.
 
 ```php
 class OpenTelemetryTrace
@@ -90,9 +92,9 @@ class OpenTelemetryTrace
 Route::middleware([..., OpenTelemetryTrace::class])->group(...);
 ```
 
-#### Configure the exporter driver
+#### Configurando o driver do Exporter
 
-In `config/open-telemetry.php`, configure the `url` and `Bearer Token`
+Em `config/open-telemetry.php`, configure a `url` and `headers` (se necessario).
 
 ```php
 'drivers' => [
@@ -104,5 +106,9 @@ In `config/open-telemetry.php`, configure the `url` and `Bearer Token`
     ],
   ],
 ],
+```
+
+```
+OTEL_EXPORTER_URL=https://api.axiom.co/v1/datasets/<dataset>/ingest
 ```
 
