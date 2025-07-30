@@ -1,19 +1,50 @@
 ## About
 
-A debugger service to record duration and memory usage of the code block it wraps. You can optionally request for the DB query logs - which works kind of like a SQL `EXPLAIN` (It will use Laravel's `DB::enableQueryLog`).
+Um serviço de Debugger para gravar `duração` e `uso de memória` do código que é envolvido.
 
-It will intelligently format the results.
+Pode opcionalmente requisitar od `query logs` do DB - que funciona como um `EXPLAIN` do SQL. (Utiliza o `DB::enableQueryLog` do Laravel)
 
-#### Config inputs
+Resultado são formatados da melhor forma. (`ms`, `s`, `min`, `kb`, `mb`, etc)
+
+</br>
+</br>
+
+## Utilizando
+
+Um serviço de extender o `DebuggerService` para receber suas funções de debug.
+
+As principais funções são:
+
+1. `setupDebug` que recebe configurações como `shouldDebug` e `withQueryLog` nesta ordem.
 
 ```php
-[
-  "shouldDebug" => false,  // To indicate if it should run the debug or not (false by default)
-  "withQueryLog" => false,  // To indicate if it should enable query logging (false by default)
-]
+$this->setupDebug(true, false);
 ```
 
-#### Return example
+2. `startDebug` que inicia o debug.
+3. `stopDebug` que termina um debug e retorna os dados coletados.
+4. `terminateDebug` para caso esteja-se pegando as query logs, executar um `DB::disableQueryLog`, ao finalizar um debug.
+
+```php
+try {
+  $this->startDebug();
+
+  // Lógica a ser debugada
+
+  $this->stopDebug();
+} finally {
+  $this->terminateDebug();
+}
+```
+
+> `finally` necessário apenas para garantir que se algum exceção acontecer durante, será executado o `DB::disableQueryLog`.
+
+</br>
+</br>
+
+## Exemplos de Retorno
+
+Sem o query log:
 
 ```php
 [
@@ -22,7 +53,7 @@ It will intelligently format the results.
 ]
 ```
 
-With query logging:
+Com o query log:
 
 ```php
 [

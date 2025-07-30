@@ -8,7 +8,7 @@ class ExampleService extends DebugService
    * - shouldDebug: bool, whether to enable debugging
    * - withQueryLogs: bool, whether to log database queries
    */
-  public function execute(array|null $debugOptions): array
+  public function execute(array|null $debugOptions = null): array
   {
     $this->setupDebug($debugOptions['shouldDebug'] ?? false, $debugOptions['withQueryLogs'] ?? false);
 
