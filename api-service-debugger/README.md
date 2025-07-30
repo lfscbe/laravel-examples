@@ -2,16 +2,16 @@
 
 Um serviço de Debugger para gravar `duração` e `uso de memória` do código que é envolvido.
 
-Pode opcionalmente requisitar od `query logs` do DB - que funciona como um `EXPLAIN` do SQL. (Utiliza o `DB::enableQueryLog` do Laravel)
+Pode opcionalmente requisitar os `query logs` do DB - que funciona como um `EXPLAIN` do SQL. (Utiliza o `DB::enableQueryLog` do Laravel)
 
-Resultado são formatados da melhor forma. (`ms`, `s`, `min`, `kb`, `mb`, etc)
+Os resultado são formatados de maneira inteligente. (`5 ms`, `1 s, 140 ms`, `2 min, 40 s`, `200 kb`, `1 mb`, etc)
 
 </br>
 </br>
 
 ## Utilizando
 
-Um serviço de extender o `DebuggerService` para receber suas funções de debug.
+Um serviço precisa extender o `DebuggerService` para receber suas funções de debug.
 
 As principais funções são:
 
